@@ -1,0 +1,10 @@
+# Application user pages
+mainPage:
+    pattern:  /index
+    defaults: { _controller: SevenGPlanetBundle:Page:mainPage }
+
+# default mapping for root url (this must be last)
+default:
+    pattern:  /
+    defaults: { _controller: SevenGPlanetBundle:Page:mainPage }
+

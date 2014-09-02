@@ -1,0 +1,113 @@
+{% extends "SevenGPlanetBundle::baseLayout.html.twig" %}
+
+{% block head %}
+    {# inherit styles and javascript from parent #}
+    {{ parent() }}
+
+    <!-- from user base layout -->
+    <!--suppress ALL -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css"/>
+    <link rel='stylesheet' id='mapinsight-fonts-css'  href='//fonts.googleapis.com/css?family=Source+Sans+Pro%3A300%2C400%2C700%2C300italic%2C400italic%2C700italic%7CBitter%3A400%2C700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+    <link rel="stylesheet" href="{{ asset('bundles/sevengplanet/css/baseStyle.css') }}"/>
+
+    {% block javascripts %}
+        {# JQuery #}
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        {# include FOS Javascript Bundle to provide Jquery/Ajax support in Symfony #}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        {# general ajax setup functions #}
+        <script type="text/javascript" src="{{ asset('/bundles/sevengplanet/js/ajax.js') }}"></script>
+    {% endblock javascripts %}
+{% endblock head %}
+
+{% block body %}
+    <!-- #site-navigation -->
+    <div id="navbar" class="navbar">
+        <nav id="site-navigation" class="navigation main-navigation">
+            <div class="menu-ei-main-menu-container">
+                <ul id="menu-ei-main-menu" class="nav-menu">
+                    <li id="menu-item-102"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-102">
+                        <a>Incidents</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-237"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-237"><a
+                                        href="/user/incident-analysis">Incident Analysis</a></li>
+                            <li id="menu-item-188"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-188"><a
+                                        href="/user/quick-location">Quick Location</a></li>
+                            <li id="menu-item-189"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-189"><a
+                                        href="/user/unlocated-incidents">Position Unlocated Incidents</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-204"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-204">
+                        <a>Routes</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-227"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-227"><a
+                                        href="/user/route-navigation">Route Navigation</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-161"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-161">
+                        <a>Support</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-178"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178"><a
+                                        href="/user/support-centre">Support Centre</a></li>
+                            <li id="menu-item-181"
+                                class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-181"><a
+                                        href="/user/faq">Frequently Asked Questions</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-215"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-215">
+                        <a>My Account</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-213"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-213"><a
+                                        href="/user/edit-profile">Edit My Profile</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li id="menu-item-145"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-146"><a
+                                        href="/admin/user-admin">User Administration</a></li>
+                            <li id="menu-item-146"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-146"><a
+                                        href="/admin/data-admin">Data Administration</a></li>
+                            {% endif %}
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {#<li id="welcome">Welcome <em>{{ app.user.username }}</em>!</li>#}
+                </ul>
+            </div>
+
+            {% block nav_buttons %}
+            {% endblock nav_buttons %}
+        </nav>
+    </div><!-- #navbar -->
+
+    {% block content_header %} {% endblock content_header %}
+
+    {% block content %} {% endblock content %}
+
+    <footer id="colophon" class="site-footer">
+        <div class="site-info">
+            <!--add EI logo floating right
+             <img src="http://dev.mapinsight.co.uk/wp-content/themes/mapping/images/mi-logo-250.png" class="footer-image-left">-->
+            <!--add First logo floating right-->
+            <div class="footer-text-right" style="font-size: 70%; margin-top: 1px">Powered and provided by
+                <img src="{{ asset('bundles/SevenGPlanetBundle/images/mi-logo-250.png') }}" class="footer-image-right">
+            </div>
+        </div><!-- .site-info -->
+    </footer><!-- #colophon -->
+
+{% endblock body %}

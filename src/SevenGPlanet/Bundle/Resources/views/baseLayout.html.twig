@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% block head %}
+        <!-- from layout -->
+        {# {% block title 'User V2' %} #}
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}"/>
+
+        <script type="text/javascript" src="{{ asset('/bundles/sevengplanet/js/messageBox.js') }}"></script>
+    {% endblock head %}
+    </head>
+
+    <body>
+        {% block body %}
+            {% block content_header %}
+            {% endblock content_header %}
+
+            <div class="block">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        {% endblock body %}
+
+        <!-- modal dialog for message box -->
+        <div id="messageBox" title="7GPlanet" style="display: none;"></div>
+    </body>
+</html>

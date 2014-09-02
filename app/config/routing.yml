@@ -1,0 +1,4 @@
+SevenGPlanetBundle:
+    prefix:   /
+    resource: "@SevenGPlanetBundle/Resources/config/routing.yml"
+
